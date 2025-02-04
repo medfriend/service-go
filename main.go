@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/medfriend/shared-commons-go/util/consul"
 	"github.com/medfriend/shared-commons-go/util/env"
@@ -10,15 +11,19 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"service-go/httpServer"
 )
 
 var db *gorm.DB
 
 func main() {
 	env.LoadEnv()
-	consulClient := consul.ConnectToConsulKey("", "SERVICE")
 
-	fmt.Println(consulClient)
+	consulClient := consul.ConnectToConsulKey("", "SERVICE")
+	serviceInfo, _ := consul.GetKeyValue(consulClient, "SERVICE")
+
+	var result map[string]string
+	err := json.Unmarshal([]byte(serviceInfo), &result)
 
 	numCPUs := runtime.NumCPU()
 
@@ -30,12 +35,14 @@ func main() {
 
 	worker.CreateWorkers(numCPUs, stop, taskQueue)
 
-	_, err := gormUtil.InitDB(
+	initDB, err := gormUtil.InitDB(
 		db,
 		consulClient,
 		os.Getenv("SERVICE_STATUS"),
 		"SERVICE",
 	)
+
+	httpServer.InitHttpServer(taskQueue, initDB, result)
 
 	if err != nil {
 		return
