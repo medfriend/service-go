@@ -7,6 +7,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
 	"net/http"
+	"service-go/router"
 )
 
 func InitHttpServer(taskQueue chan *http.Request, db *gorm.DB, serviceInfo map[string]string) {
@@ -18,9 +19,9 @@ func InitHttpServer(taskQueue chan *http.Request, db *gorm.DB, serviceInfo map[s
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	err := r.Run(fmt.Sprintf(":%s", serviceInfo["SERVICE_PORT"]))
+	router.InitializeAllRouters(api, db)
 
-	fmt.Println(api)
+	err := r.Run(fmt.Sprintf(":%s", serviceInfo["SERVICE_PORT"]))
 
 	if err != nil {
 		return

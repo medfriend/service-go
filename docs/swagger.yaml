@@ -1,0 +1,27 @@
+info:
+  contact: {}
+paths:
+  /servicio/{prefijo}:
+    get:
+      consumes:
+      - application/json
+      description: obtener servicio.
+      produces:
+      - application/json
+      responses:
+        "400":
+          description: Error en el cuerpo de la solicitud
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Error interno del servidor
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: obtener prefijo
+      tags:
+      - servicio
+swagger: "2.0"
