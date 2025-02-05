@@ -7,6 +7,7 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
 	"net/http"
+	_ "service-go/docs"
 	"service-go/router"
 )
 

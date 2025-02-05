@@ -9,7 +9,15 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "Soporte de API",
+            "url": "http://www.soporte-api.com",
+            "email": "soporte@api.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -28,6 +36,15 @@ const docTemplate = `{
                     "servicio"
                 ],
                 "summary": "obtener prefijo",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "prefijo o abreviatura",
+                        "name": "prefijo",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "400": {
                         "description": "Error en el cuerpo de la solicitud",
@@ -50,21 +67,27 @@ const docTemplate = `{
                 }
             }
         }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Ingresa \"Bearer {token}\" para autenticar.",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
     }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:9020",
+	BasePath:         "/medfri-service",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "medfri-service",
+	Description:      "micro de servicios.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
-	LeftDelim:        "{{",
-	RightDelim:       "}}",
 }
 
 func init() {

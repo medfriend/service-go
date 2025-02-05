@@ -22,6 +22,7 @@ func NewServicioController(servicioService service.ServicioService) *ServiceCont
 // @Tags servicio
 // @Accept json
 // @Produce json
+// @Param   prefijo  path  string true  "prefijo o abreviatura"
 // @Failure 400 {object} map[string]string "Error en el cuerpo de la solicitud"
 // @Failure 500 {object} map[string]string "Error interno del servidor"
 // @Router /servicio/{prefijo} [get]

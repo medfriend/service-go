@@ -1,8 +1,21 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "micro de servicios.",
+        "title": "medfri-service",
+        "contact": {
+            "name": "Soporte de API",
+            "url": "http://www.soporte-api.com",
+            "email": "soporte@api.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
     },
+    "host": "localhost:9020",
+    "basePath": "/medfri-service",
     "paths": {
         "/servicio/{prefijo}": {
             "get": {
@@ -17,6 +30,15 @@
                     "servicio"
                 ],
                 "summary": "obtener prefijo",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "prefijo o abreviatura",
+                        "name": "prefijo",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "400": {
                         "description": "Error en el cuerpo de la solicitud",
@@ -38,6 +60,14 @@
                     }
                 }
             }
+        }
+    },
+    "securityDefinitions": {
+        "BearerAuth": {
+            "description": "Ingresa \"Bearer {token}\" para autenticar.",
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
         }
     }
 }

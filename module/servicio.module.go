@@ -1,3 +1,8 @@
+// filename: servicio.module.go
+// go:build wireinject
+//go:build wireinject
+// +build wireinject
+
 package module
 
 import (

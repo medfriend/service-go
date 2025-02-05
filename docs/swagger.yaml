@@ -1,11 +1,28 @@
+basePath: /medfri-service
+host: localhost:9020
 info:
-  contact: {}
+  contact:
+    email: soporte@api.com
+    name: Soporte de API
+    url: http://www.soporte-api.com
+  description: micro de servicios.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: medfri-service
+  version: "1.0"
 paths:
   /servicio/{prefijo}:
     get:
       consumes:
       - application/json
       description: obtener servicio.
+      parameters:
+      - description: prefijo o abreviatura
+        in: path
+        name: prefijo
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -24,4 +41,10 @@ paths:
       summary: obtener prefijo
       tags:
       - servicio
+securityDefinitions:
+  BearerAuth:
+    description: Ingresa "Bearer {token}" para autenticar.
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

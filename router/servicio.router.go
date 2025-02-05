@@ -8,8 +8,8 @@ import (
 
 func NewServicioRouter(router *gin.RouterGroup, db *gorm.DB) {
 	servicioController := module.InitializeServicioModule(db)
-	routerGroup := router.Group("auth")
-	routerGroup.POST("/{prefijo}", servicioController.GetServiceByPrefijo)
+	routerGroup := router.Group("servicio")
+	routerGroup.GET("/:prefijo", servicioController.GetServiceByPrefijo)
 }
 
 func init() {

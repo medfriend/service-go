@@ -1,5 +1,24 @@
 package main
 
+// @title           medfri-service
+// @version         1.0
+// @description     micro de servicios.
+
+// @host            localhost:9020
+// @BasePath        /medfri-service
+
+// @securityDefinitions.apikey BearerAuth
+// @in header
+// @name Authorization
+// @description Ingresa "Bearer {token}" para autenticar.
+
+// @contact.name    Soporte de API
+// @contact.url     http://www.soporte-api.com
+// @contact.email   soporte@api.com
+
+// @license.name    MIT
+// @license.url     https://opensource.org/licenses/MIT
+
 import (
 	"encoding/json"
 	"fmt"
