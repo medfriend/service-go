@@ -30,6 +30,7 @@ func (ctrl *ServiceController) GetServiceByPrefijo(c *gin.Context) {
 	servicio, err := ctrl.ServicioService.FindByPrefijo(c.Param("prefijo"))
 	if err != nil {
 	}
-	controller.HandlerFoundSuccess(c, err, "servicio")
-	controller.HandlerFound(c, servicio)
+	if !controller.HandlerFoundSuccess(c, err, "servicio") {
+		controller.HandlerFound(c, servicio)
+	}
 }
